@@ -3,7 +3,7 @@
 #define PROJECT_NAME "iperf3-wrapper.exe"
 
 std::thread iperf::server::tIperf;
-std::string iperf::server::port = "5201";
+std::string iperf::server::port = "5222";
 
 std::string iperf::client::exec(const char* cmd) {
 	std::array<char, 128> buffer;
@@ -20,17 +20,19 @@ std::string iperf::client::exec(const char* cmd) {
 
 std::string iperf::client::check(std::string ip, std::string host)
 {
-	std::string cmd = "iperf3 -c " + ip;
+	std::string iperf_path = iperf::getExePath(PROJECT_NAME) + R"(iperf\run)";
+	std::string cmd = "cd /D " + iperf_path + " && iperf3 -c " + ip + " -p " + host;
+	//int a = system(cmd.c_str());
+
 	return exec(cmd.c_str());
 }
+//----------------------------------------------------------------------------
 void iperf::server::start()
 {
-	std::string iperf_path = getExePath(PROJECT_NAME) + R"(iperf\run)";
-	std::string cmd = "cd " + iperf_path ;
-	system(cmd.c_str());
 	auto wrap = [&]() {
-		std::string cmd = "iperf3 -s -p " + port;
-		system(cmd.c_str());
+		std::string iperf_path = iperf::getExePath(PROJECT_NAME) + R"(iperf\run)";
+		std::string cmd = "cd /D " + iperf_path + " && iperf3 -s -p " + port;
+		int a = system(cmd.c_str());
 	};
 	iperf::server::tIperf = std::move(std::thread(wrap));
 	iperf::server::tIperf.detach();

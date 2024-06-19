@@ -111,7 +111,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(ProjectDir)iperf\run\ $(SolutionDir)$(Platform)\$(Configuration)\iperf\run\ /E/Y</Command>
+      <Command>xcopy $(ProjectDir)iperf\run\ $(OutDir)\iperf\run\  /E/Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -130,7 +130,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(ProjectDir)iperf\run\ $(SolutionDir)$(Platform)\$(Configuration)\iperf\run\ /E/Y</Command>
+      <Command>xcopy $(ProjectDir)iperf\run\ $(OutDir)\iperf\run\  /E/Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
