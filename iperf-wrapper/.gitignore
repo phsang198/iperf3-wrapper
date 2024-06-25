@@ -47,7 +47,6 @@ x64/
 *.a
 
 # Executables
-*.exe
 *.out
 *.app
 
