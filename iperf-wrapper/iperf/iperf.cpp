@@ -31,7 +31,7 @@ void iperf::server::start()
 {
 	auto wrap = [&]() {
 		std::string iperf_path = iperf::getExePath(PROJECT_NAME) + R"(iperf\run)";
-		std::string cmd = "cd /D " + iperf_path + " && iperf3 -s -p " + port;
+		std::string cmd = "cd /D " + iperf_path + " && iperf3 -s -p " + port + " -1";
 		int a = system(cmd.c_str());
 	};
 	iperf::server::tIperf = std::move(std::thread(wrap));
